@@ -1,14 +1,12 @@
 import { Router } from 'express';
-import multer from 'multer';
 import type { Request, Response } from 'express';
 import type { ApiResponse } from '../types/api.js'
 import { API_CODES, API_RESPONSES } from '../constants/api.js';
+import { upload } from '../middlewares/upload.js';
+import { middlewareErrorHandler } from '../handlers/middlewareErrorHandler.js';
+import { HTTP_CODES } from '../constants/http.js';
 
 const router: Router = Router();
-
-const upload = multer({
-    storage: multer.memoryStorage()
-})
 
 router.get('/', (req: Request, res: Response) => {
     res.send('Identifying...')
@@ -21,7 +19,7 @@ router.post('/', upload.single('file'), (req: Request, res: Response) => {
             message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? ''
         };
 
-        return res.status(400).json(response);
+        return res.status(HTTP_CODES.BAD_REQUEST).json(response);
     }
 
     const response: ApiResponse<{ fileName: string; fileSize: number }> = {
@@ -33,7 +31,9 @@ router.post('/', upload.single('file'), (req: Request, res: Response) => {
         }
     };
 
-    res.json(response);
+    res.status(HTTP_CODES.OK).json(response);
 })
+
+router.use(middlewareErrorHandler);
 
 export default router;
