@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
-import type { ApiResponse } from '../types/api.js'
-import { API_CODES, API_RESPONSES } from '../constants/api.js';
 import { upload } from '../middlewares/upload.js';
 import { middlewareErrorHandler } from '../handlers/middlewareErrorHandler.js';
-import { HTTP_CODES } from '../constants/http.js';
+import { identifier } from '../handlers/identifier.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router: Router = Router();
 
@@ -12,27 +13,7 @@ router.get('/', (req: Request, res: Response) => {
     res.send('Identifying...')
 })
 
-router.post('/', upload.single('file'), (req: Request, res: Response) => {
-    if (!req.file) {
-        const response: ApiResponse = {
-            code: API_CODES.BAD_REQUEST_NO_FILE,
-            message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? ''
-        };
-
-        return res.status(HTTP_CODES.BAD_REQUEST).json(response);
-    }
-
-    const response: ApiResponse<{ fileName: string; fileSize: number }> = {
-        code: API_CODES.UPLOAD_SUCCESS,
-        message: API_RESPONSES.get(API_CODES.UPLOAD_SUCCESS) ?? '',
-        data: {
-            fileName: req.file.originalname,
-            fileSize: req.file.size
-        }
-    };
-
-    res.status(HTTP_CODES.OK).json(response);
-})
+router.post('/', upload.single('file'), identifier);
 
 router.use(middlewareErrorHandler);
 
