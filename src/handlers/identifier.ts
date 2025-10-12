@@ -8,7 +8,6 @@ import type { PossibleLabel } from '../types/vision.js';
 const visionClient = new vision.ImageAnnotatorClient();
 
 export async function identifier(req: Request, res: Response, next: NextFunction) {
-    console.log('ahoigd')
     if (!req.file) {
         const response: ApiResponse = {
             code: API_CODES.BAD_REQUEST_NO_FILE,
