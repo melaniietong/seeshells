@@ -11,7 +11,7 @@ const fileFilter = (
     cb: multer.FileFilterCallback
 ) => {
     if (ALLOWED_FILE_TYPES.includes(file.mimetype)) {
-        cb(null, true);
+        return cb(null, true);
     }
 
     cb(new MiddlewareError(API_CODES.BAD_REQUEST_INVALID_FILE))
