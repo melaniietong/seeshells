@@ -5,3 +5,8 @@ export interface ApiResponse<T = any> {
     message: string
     data?: T;
 };
+
+export interface PossibleLabel {
+    description: string|undefined,
+    score: number|undefined
+};
