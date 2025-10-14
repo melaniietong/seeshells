@@ -7,3 +7,8 @@ An AI-powered web app that helps users identify seashells from photos, using a c
 - [Set Up](./docs/SETUP.md)
     - [Model Training Guide](./docs/SETUP.md#model-training-guide)
     - [App Guide](./docs/SETUP.md#app-guide)
+
+## Preview
+
+![Vertex model](./docs//images/vertex-model.png)
+> Custom-trained model with Vertex AI
