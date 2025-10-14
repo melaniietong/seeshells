@@ -8,5 +8,5 @@ const PORT: number = 9000;
 app.use('/', mainRouter);
 
 app.listen(PORT, () => {
-    console.log(`🏃: Server running on port ${PORT}`);
+    console.log(`[🏃] Server running on port ${PORT}`);
 })
