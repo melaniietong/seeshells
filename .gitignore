@@ -11,12 +11,18 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
 
 # TypeScript build artifacts
 src/**/*.js
 src/**/*.d.ts
 src/**/*.js.map
 src/**/*.d.ts.map
+
+client/**/*.js
+client/**/*.d.ts
+client/**/*.js.map
+client/**/*.d.ts.map
 
 # Editor directories and files
 .vscode/*
