@@ -1,0 +1,32 @@
+@use 'variables';
+
+.title {
+    font-family: variables.$font_justMeAgainDownHere;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 52px;
+
+    display: inline-block;
+    background: linear-gradient(96.7deg, variables.$yellow 7.83%, variables.$blue 94.92%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.text-regular {
+    font-family: variables.$font_gantari;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: auto;
+
+    color: variables.$grey;
+}
+
+/////////// ALIGNMENT ///////////
+
+.text-center {
+    text-align: center;
+}

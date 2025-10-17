@@ -1,0 +1,93 @@
+@use 'variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/////////// FLEX ///////////
+
+.d-flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-24 {
+    gap: 24px;
+}
+
+.gap-32 {
+    gap: 32px;
+}
+
+/////////// WIDTH + HEIGHT ///////////
+
+.w-100 {
+    width: 100%;
+}
+
+.w-80px {
+    width: 80px;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.res-width-800 {
+    width: min(800px, 100% - 32px);
+}
+
+.res-height-500 {
+    height: min(500px, calc(100vh - 140px));
+}
+
+/////////// PADDING ///////////
+
+.p-32 {
+    padding: 32px;
+}
+
+.p-x-16 {
+    padding: 16px 0 16px 0;
+}
+
+/////////// BORDERS ///////////
+
+.border-radius-25 {
+    border-radius: 25px;
+}
+
+.dashed-border {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='25' ry='25' stroke='%23333' stroke-width='5' stroke-dasharray='10%2c15' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-color: variables.$grey;
+}
+
+/////////// CURSORS ///////////
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/////////// COLORS ///////////
+
+.background-gradient {
+    background: linear-gradient(111.23deg, variables.$light-yellow 1.79%, variables.$light-blue 98.89%);
+}

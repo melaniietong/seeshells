@@ -1,0 +1,35 @@
+@use 'variables';
+
+.drag-overlay {
+  position: fixed;
+  inset: 0;
+  background: variables.$dark;
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.drag-overlay.visible {
+  opacity: 1;
+}
+
+.upload-box {
+  position: relative;
+  z-index: 9;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.upload-icon.bounce {
+  animation: float 1.8s ease-in-out infinite;
+}
