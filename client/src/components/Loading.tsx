@@ -2,8 +2,7 @@ import '../styles/styles.scss';
 
 const Loading = () => (
     <svg
-        width={90}
-        height={90}
+        className='w-80px'
         fill='none'
         viewBox='0 0 500 500'
         xmlns='http://www.w3.org/2000/svg' >
