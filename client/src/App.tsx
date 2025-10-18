@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './styles/styles.scss'
 import Upload from './components/Upload.tsx';
+import identify from './utils/api.ts';
 
 const App: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleDragEnter = (e: DragEvent) => {
@@ -43,8 +45,13 @@ const App: React.FC = () => {
     };
   }, []);
 
-  const handleUpload = () => {
+  const handleUpload = async (file: File) => {
     setIsDragging(false);
+    setIsLoading(true);
+
+    identify(file).then(() => {
+      setIsLoading(false);
+    });
   };
 
   return (
@@ -62,6 +69,7 @@ const App: React.FC = () => {
 
         <Upload 
           isDragging={isDragging} 
+          isLoading={isLoading}
           onUpload={handleUpload} />
       </div>
     </div>

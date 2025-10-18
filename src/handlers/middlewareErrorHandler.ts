@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
-import { API_RESPONSES } from '../constants/api.js';
-import type { ApiResponse } from '../types/api.js';
+import { API_RESPONSES } from '../../shared/constants/api.js';
+import type { ApiResponse } from '../../shared/types/api.js';
 import { MiddlewareError } from '../constants/error.js';
 import { HTTP_CODES } from '../constants/http.js';
 

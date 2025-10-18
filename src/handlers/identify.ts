@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
-import type { ApiResponse, PossibleLabel } from '../types/api.js'
-import { API_CODES, API_RESPONSES } from '../constants/api.js';
+import type { ApiResponse, PossibleLabel } from '../../shared/types/api.js'
+import { API_CODES, API_RESPONSES } from '../../shared/constants/api.js';
 import { HTTP_CODES } from '../constants/http.js';
 import { PredictionServiceClient } from '@google-cloud/aiplatform';
 import type { protos } from '@google-cloud/aiplatform';

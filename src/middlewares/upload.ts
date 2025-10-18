@@ -1,6 +1,6 @@
 import multer from 'multer';
 import { MiddlewareError } from '../constants/error.js';
-import { API_CODES } from '../constants/api.js';
+import { API_CODES } from '../../shared/constants/api.js';
 
 const storage = multer.memoryStorage();
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/jpg', 'image/png']
