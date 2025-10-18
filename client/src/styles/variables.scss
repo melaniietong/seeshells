@@ -10,6 +10,12 @@ $blue: #6ED8EF;
 $light-blue: #CFF6FF;
 $grey: #6B6B6B;
 $dark: rgba(0, 0, 0, 0.5);
+$white: #FFFFFF;
+
+:root {
+  --grey: #{$grey};
+  --white: #{$white};
+}
 
 /////////// FONTS ///////////
 
