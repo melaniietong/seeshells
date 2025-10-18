@@ -4,7 +4,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  pointer-events: none;
 }
 
 /////////// FLEX ///////////
@@ -85,6 +84,10 @@
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.pointer-events-none {
+    pointer-events: none;
 }
 
 /////////// COLORS ///////////

@@ -41,7 +41,7 @@ const Upload: React.FC<UploadProps> = ({ isDragging, onUpload }) => {
                 <img
                     src={uploadIcon}
                     alt='Upload'
-                    className={`w-80px upload-icon ${isDragging ? 'bounce' : ''}`} />
+                    className={`w-80px upload-icon pointer-events-none ${isDragging ? 'bounce' : ''}`} />
 
                 <p
                     className='text-regular text-center'
