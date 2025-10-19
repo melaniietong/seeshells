@@ -10,5 +10,8 @@ An AI-powered web app that helps users identify seashells from photos, using a c
 
 ## Preview
 
+<video src="https://github.com/user-attachments/assets/eb1d2042-930d-4704-ad08-b692781f12a3"></video>
+> Upload an image of the seashell and see predictions for what the species is!
+
 ![Vertex model](./docs//images/vertex-model.png)
 > Custom-trained model with Vertex AI
