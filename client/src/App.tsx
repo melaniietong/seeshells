@@ -64,13 +64,19 @@ const App: React.FC = () => {
     }
   };
 
+  const restart = () => {
+    setIsDragging(false);
+    setIsLoading(false);
+    setResult(null);
+  }
+
   return (
     <div className='main-container d-flex flex-center p-x-16'>
       <div className={`drag-overlay ${isDragging ? 'visible' : ''}`} />
 
       <div className='res-width-800 d-flex flex-col gap-32'>
         <div className='w-100'>
-          <h1 className='title'>SeeShells</h1>
+          <h1 className='title cursor-pointer' onClick={restart}>SeeShells</h1>
           <div className='d-flex gap-8 justify-space-between'>
             <div className='text-regular'>Identify seashells using AI image recognition</div>
             <div className='text-regular'>🌊 🐚 👀 ✨</div>
