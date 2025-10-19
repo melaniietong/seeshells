@@ -14,6 +14,38 @@ const vertexClient: PredictionServiceClient = new PredictionServiceClient({
 });
 
 export async function identify(req: Request, res: Response, next: NextFunction) {
+//      const dummyPredictions: PossibleLabel[] = [
+//     { description: 'Amoria maculata', score: 0.92 },
+//     { description: 'Pecten jacobaeus', score: 0.627 },
+//     { description: 'Argopecten irradians', score: 0.437 },
+//   ];
+
+//     const response: ApiResponse = {
+//         code: API_CODES.PREDICTION_SUCCESS,
+//         message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
+//         data: dummyPredictions
+//     };
+
+//         return res.status(HTTP_CODES.OK).json(response);
+        
+
+    // const response: ApiResponse = {
+    //             code: API_CODES.BAD_REQUEST_NO_FILE,
+    //             message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? ''
+    //         };
+
+    //         return res.status(HTTP_CODES.BAD_REQUEST).json(response);
+
+
+
+
+
+
+
+
+
+
+    
     try {
         if (!req.file) {
             const response: ApiResponse = {

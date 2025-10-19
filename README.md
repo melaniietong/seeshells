@@ -25,3 +25,6 @@ For the look of the app, I used Figma to draft up the prototype. I wanted to cre
 
 ![Vertex model](./docs//images/vertex-model.png)
 > ✨ Custom-trained model with Vertex AI
+
+![Wikipedia images](./docs//images/wikipedia-images.png)
+> 📷 Integrates with Wikipedia's API to get images of species

@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+creds
 
 # TypeScript build artifacts
 src/**/*.js
@@ -23,6 +24,11 @@ client/**/*.js
 client/**/*.d.ts
 client/**/*.js.map
 client/**/*.d.ts.map
+
+shared/**/*.js
+shared/**/*.d.ts
+shared/**/*.js.map
+shared/**/*.d.ts.map
 
 # Editor directories and files
 .vscode/*
