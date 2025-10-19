@@ -1,8 +1,12 @@
 import '../styles/styles.scss';
 
-const Loading = () => (
+interface LoadingProps {
+    cn: string
+}
+
+const Loading: React.FC<LoadingProps> = ({cn}) => (
     <svg
-        className='w-80px'
+        className={cn}
         fill='none'
         viewBox='0 0 500 500'
         xmlns='http://www.w3.org/2000/svg' >

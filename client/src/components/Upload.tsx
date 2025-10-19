@@ -36,14 +36,15 @@ const Upload: React.FC<UploadProps> = ({ isDragging, isLoading, onUpload }) => {
     return (
         <div className='upload-box w-100 background-gradient border-radius-25 p-32 res-height-500'>
             <div
-                className='h-100 d-flex flex-center flex-col gap-24 border-radius-25 dashed-border cursor-pointer'
+                className='h-100 d-flex flex-center flex-col border-radius-25 dashed-border cursor-pointer'
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onClick={handleInputClick}>
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                    <>
+                {/* The API call blocks the paint frame (which triggers the Loader's animation), to avoid this the Loader component is kept in the DOM */}
+                <Loading cn={isLoading ? 'w-90px' : 'w-0px'}/>
+
+                {!isLoading && (
+                    <div className='d-flex flex-center flex-col gap-24'>
                         <img
                             src={uploadIcon}
                             alt='Upload'
@@ -64,7 +65,7 @@ const Upload: React.FC<UploadProps> = ({ isDragging, isLoading, onUpload }) => {
                             className='display-none'
                             onChange={handleInputChange}
                         />
-                    </>
+                    </div>
                 )}
             </div>
         </div>
