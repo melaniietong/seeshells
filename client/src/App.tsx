@@ -49,6 +49,9 @@ const App: React.FC = () => {
     setIsDragging(false);
     setIsLoading(true);
 
+    // This is needed to force a frame update to get the Loader component ready to animate in time
+    await new Promise(requestAnimationFrame);
+
     identify(file).then(() => {
       setIsLoading(false);
     });
