@@ -3,14 +3,20 @@
 
 /////////// COLORS ///////////
 
-$background-yellow: rgba(255,252,232,0.25);
+$background-yellow: rgba(255, 252, 232, 0.25);
+
 $yellow: #ECE16D;
 $light-yellow: #FFFCD7;
 $blue: #6ED8EF;
 $light-blue: #CFF6FF;
 $grey: #6B6B6B;
+$light-grey: #F5F5F5;
 $dark: rgba(0, 0, 0, 0.5);
 $white: #FFFFFF;
+
+$score-green: #AEEFA1;
+$score-yellow: #EFE6A1;
+$score-red: #EFA1A1;
 
 :root {
   --grey: #{$grey};

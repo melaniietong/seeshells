@@ -15,11 +15,41 @@
     color: transparent;
 }
 
+.text-regular-small {
+    font-family: variables.$font_gantari;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: auto;
+
+    color: variables.$grey;
+}
+
+.text-regular-small-bold {
+    font-family: variables.$font_gantari;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: auto;
+
+    color: variables.$grey;
+}
+
 .text-regular {
     font-family: variables.$font_gantari;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+    line-height: auto;
+
+    color: variables.$grey;
+}
+
+.text-regular-large {
+    font-family: variables.$font_gantari;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
     line-height: auto;
 
     color: variables.$grey;

@@ -3,7 +3,11 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
 }
 
 /////////// FLEX ///////////
@@ -25,8 +29,16 @@
     justify-content: space-between;
 }
 
+.gap-4 {
+    gap: 4px;
+}
+
 .gap-8 {
     gap: 8px;
+}
+
+.gap-12 {
+    gap: 12px;
 }
 
 .gap-24 {
@@ -35,6 +47,10 @@
 
 .gap-32 {
     gap: 32px;
+}
+
+.gap-42 {
+    gap: 42px;
 }
 
 /////////// DISPLAY ///////////
@@ -49,8 +65,16 @@
     width: 100%;
 }
 
+.w-50 {
+    width: 50%;
+}
+
 .w-0px {
     width: 0px;
+}
+
+.w-12px {
+    width: 12px;
 }
 
 .w-80px {
@@ -65,6 +89,10 @@
     height: 100%;
 }
 
+.h-20px {
+    height: 20px;
+}
+
 .res-width-800 {
     width: min(800px, 100% - 32px);
 }
@@ -75,12 +103,22 @@
 
 /////////// PADDING ///////////
 
+.p-24 {
+    padding: 24px;
+}
+
 .p-32 {
     padding: 32px;
 }
 
 .p-x-16 {
     padding: 16px 0 16px 0;
+}
+
+/////////// MARGIN ///////////
+
+.m-b-4 {
+    margin-bottom: 4px;
 }
 
 /////////// BORDERS ///////////
@@ -108,4 +146,24 @@
 
 .background-gradient {
     background: linear-gradient(111.23deg, variables.$light-yellow 1.79%, variables.$light-blue 98.89%);
+}
+
+.background-white {
+    background: variables.$white;
+}
+
+.background-light-grey {
+    background: variables.$light-grey;
+}
+
+.background-green {
+    background: variables.$score-green;
+}
+
+.background-yellow {
+    background: variables.$score-yellow;
+}
+
+.background-red {
+    background: variables.$score-red;
 }

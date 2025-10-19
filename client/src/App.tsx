@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import './styles/styles.scss'
 import Upload from './components/Upload.tsx';
 import identify from './utils/api.ts';
+import type { ApiResponse } from '../../shared/types/api.ts';
+import Overview from './components/Overview.tsx';
 
 const App: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
     const handleDragEnter = (e: DragEvent) => {
@@ -49,9 +52,16 @@ const App: React.FC = () => {
     setIsDragging(false);
     setIsLoading(true);
 
-    identify(file).then(() => {
+    try {
+      const data = await identify(file);
+      if (data) setResult(data);
+    } catch (err) {
+      setResult(null);
+
+      console.error(`[🔴] ${err}`);
+    } finally {
       setIsLoading(false);
-    });
+    }
   };
 
   return (
@@ -67,10 +77,15 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <Upload 
-          isDragging={isDragging} 
-          isLoading={isLoading}
-          onUpload={handleUpload} />
+        {result ? (
+          <Overview result={result} />
+        ) : (
+          <Upload
+            isDragging={isDragging}
+            isLoading={isLoading}
+            onUpload={handleUpload} />
+        )}
+
       </div>
     </div>
   )
