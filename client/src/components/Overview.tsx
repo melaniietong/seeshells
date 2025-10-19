@@ -32,9 +32,11 @@ const Overview: React.FC<OverviewProps> = ({ result }) => {
     return (
         <div className='w-100 background-gradient border-radius-25 p-32 res-height-500'>
             <div className='h-100 d-flex gap-24 background-white border-radius-25 p-24'>
-                <img
-                    src={`${imageUrl || ''}`}
-                    className='w-50' />
+                {imageUrl != '' && (
+                    <img
+                        src={`${imageUrl}`}
+                        className='w-50' />
+                )}
                 <div className='w-50 d-flex flex-col gap-42'>
                     <div className='d-flex flex-col gap-12'>
                         <div className='text-regular m-b-4'>Top prediction</div>
