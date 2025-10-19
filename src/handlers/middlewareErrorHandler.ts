@@ -8,7 +8,8 @@ export function middlewareErrorHandler(err: any, req: Request, res: Response, ne
   if (err instanceof MiddlewareError) {
     const response: ApiResponse = {
       code: err.code,
-      message: API_RESPONSES.get(err.code) ?? ''
+      message: API_RESPONSES.get(err.code) ?? '',
+      data: []
     };
 
     return res.status(HTTP_CODES.BAD_REQUEST).json(response);

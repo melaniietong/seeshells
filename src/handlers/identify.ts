@@ -18,7 +18,8 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
         if (!req.file) {
             const response: ApiResponse = {
                 code: API_CODES.BAD_REQUEST_NO_FILE,
-                message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? ''
+                message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? '',
+                data: []
             };
 
             return res.status(HTTP_CODES.BAD_REQUEST).json(response);
@@ -48,6 +49,7 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
         const response: ApiResponse = {
             code: API_CODES.PREDICTION_NO_DATA,
             message: API_RESPONSES.get(API_CODES.PREDICTION_NO_DATA) ?? '',
+            data: []
         };
         
         return res.status(HTTP_CODES.BAD_REQUEST).json(response);
@@ -88,6 +90,7 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
             const response: ApiResponse = {
                 code: API_CODES.INTERNAL_SERVER_ERROR,
                 message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
+                data: []
             };
             
             return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
@@ -97,18 +100,10 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
     possibleLabels.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
     const top3PossibleLabels = possibleLabels.slice(0, 3);
 
-    const response: ApiResponse<{
-        fileName: string;
-        fileSize: number;
-        possibleLabels: PossibleLabel[]
-    }> = {
+    const response: ApiResponse = {
         code: API_CODES.PREDICTION_SUCCESS,
         message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
-        data: {
-            fileName: req.file.originalname,
-            fileSize: req.file.size,
-            possibleLabels: top3PossibleLabels
-        }
+        data: top3PossibleLabels
     };
 
         res.status(HTTP_CODES.OK).json(response);
@@ -118,6 +113,7 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
         const response: ApiResponse = {
             code: API_CODES.INTERNAL_SERVER_ERROR,
             message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
+            data: []
         };
 
         res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
