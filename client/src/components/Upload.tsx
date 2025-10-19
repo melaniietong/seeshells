@@ -34,7 +34,7 @@ const Upload: React.FC<UploadProps> = ({ isDragging, isLoading, onUpload }) => {
     };
 
     return (
-        <div className={`w-100 background-gradient border-radius-25 p-32 res-height-500 ${isLoading ? 'upload-box' : ''}`}>
+        <div className='upload-box w-100 background-gradient border-radius-25 p-32 res-height-500'>
             <div
                 className='h-100 d-flex flex-center flex-col gap-24 border-radius-25 dashed-border cursor-pointer'
                 onDrop={handleDrop}
