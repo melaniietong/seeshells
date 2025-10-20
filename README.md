@@ -17,6 +17,7 @@ For the look of the app, I used Figma to draft up the prototype. I wanted to cre
 - [Setup](./docs/SETUP.md)
     - [Model Training Guide](./docs/SETUP.md#model-training-guide)
     - [App Guide](./docs/SETUP.md#app-guide)
+- [API documentaion](./docs/openapi.yml)
 
 ## Preview
 
