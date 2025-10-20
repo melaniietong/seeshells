@@ -1,4 +1,4 @@
-# Set Up
+# Setup
 
 ## Prerequisites
 - You'll need a dataset of seashell images. I used this one: https://doi.org/10.6084/m9.figshare.9122621.v1.

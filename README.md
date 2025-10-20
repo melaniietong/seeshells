@@ -14,7 +14,7 @@ For the look of the app, I used Figma to draft up the prototype. I wanted to cre
 
 ## Links
 
-- [Set Up](./docs/SETUP.md)
+- [Setup](./docs/SETUP.md)
     - [Model Training Guide](./docs/SETUP.md#model-training-guide)
     - [App Guide](./docs/SETUP.md#app-guide)
 
