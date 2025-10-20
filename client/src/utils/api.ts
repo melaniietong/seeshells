@@ -1,6 +1,7 @@
-import type { ApiResponse } from '../../../shared/types/api.js'
+import type { ApiResponse } from '../../../shared/types/api.js';
 import sleep from './helpers.js';
 import { toast } from 'react-toastify';
+import { HTTP_CODES } from '../../../shared/constants/http.js';
 
 export const identify = async (file: File) => {
   const formData = new FormData();
@@ -17,7 +18,7 @@ export const identify = async (file: File) => {
   await sleep(3000);
 
   if (!response.ok) {
-    if (response.status === 400) {
+    if (response.status === HTTP_CODES.BAD_REQUEST) {
       toast.warn(res.message)
     } else {
       toast.error(res.message)

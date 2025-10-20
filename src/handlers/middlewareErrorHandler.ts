@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { API_RESPONSES } from '../../shared/constants/api.js';
 import type { ApiResponse } from '../../shared/types/api.js';
 import { MiddlewareError } from '../constants/error.js';
-import { HTTP_CODES } from '../constants/http.js';
+import { HTTP_CODES } from '../../shared/constants/http.js';
 
 export function middlewareErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   if (err instanceof MiddlewareError) {
