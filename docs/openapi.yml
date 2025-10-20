@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: SeeShells API
+  version: 1.0.0
+  description: API for identifying seashells
+servers:
+  - url: http://localhost:9000
+paths:
+  /identify:
+    post:
+      summary: Returns predictions for seashell species based on an image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: JPEG, JPG, or PNG image file
+      responses:
+        '200':
+          description: Prediction request successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Application-level status code for the request
+                    enum: [S200, E400, E401, E402, E500]
+                    example: S200
+                  message:
+                    type: string
+                    description: Human-readable message describing the outcome
+                    example: Prediction was successful
+                  data:
+                    type: array
+                    description: Prediction results
+                    items:
+                      type: object
+                      properties:
+                        description:
+                          type: string
+                          description: Species name
+                          example: Triplofusus princeps
+                        score:
+                          type: number
+                          description: Prediction confidence percentage in decmial format
+                          example: 0.92
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Application-level status code for the request
+                    enum: [S200, E400, E401, E402, E500]
+                    example: E400
+                  message:
+                    type: string
+                    description: Human-readable message describing the outcome
+                    example: No file uploaded. Please upload a file
+                  data:
+                    type: array
+                    description: Empty
+                    items: {}
+                    example: []
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Application-level status code for the request
+                    enum: [S200, E400, E401, E402, E500]
+                    example: E500
+                  message:
+                    type: string
+                    description: Human-readable message describing the outcome
+                    example: Internal server error. Please contact the server owner
+                  data:
+                    type: array
+                    description: Empty
+                    items: {}
+                    example: []
