@@ -4,6 +4,7 @@ import Upload from './components/Upload.tsx';
 import identify from './utils/api.ts';
 import type { ApiResponse } from '../../shared/types/api.ts';
 import Overview from './components/Overview.tsx';
+import { ToastContainer, Slide } from 'react-toastify';
 
 const App: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -93,6 +94,14 @@ const App: React.FC = () => {
         )}
 
       </div>
+
+      <ToastContainer
+        position='bottom-left'
+        autoClose={5000}
+        pauseOnHover
+        theme='colored'
+        transition={Slide}
+      />
     </div>
   )
 }
