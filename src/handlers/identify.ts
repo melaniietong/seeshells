@@ -14,20 +14,20 @@ const vertexClient: PredictionServiceClient = new PredictionServiceClient({
 });
 
 export async function identify(req: Request, res: Response, next: NextFunction) {
-//      const dummyPredictions: PossibleLabel[] = [
-//     { description: 'Amoria maculata', score: 0.92 },
-//     { description: 'Pecten jacobaeus', score: 0.627 },
-//     { description: 'Argopecten irradians', score: 0.437 },
-//   ];
+    const dummyPredictions: PossibleLabel[] = [
+        { description: 'Gemmulimitra avenacea', score: 0.926 },
+        { description: 'Pecten jacobaeus', score: 0.622 },
+        { description: 'Argopecten irradians', score: 0.437 },
+    ];
 
-//     const response: ApiResponse = {
-//         code: API_CODES.PREDICTION_SUCCESS,
-//         message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
-//         data: dummyPredictions
-//     };
+    const response: ApiResponse = {
+        code: API_CODES.PREDICTION_SUCCESS,
+        message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
+        data: dummyPredictions
+    };
 
-//         return res.status(HTTP_CODES.OK).json(response);
-        
+    return res.status(HTTP_CODES.OK).json(response);
+
 
     // const response: ApiResponse = {
     //             code: API_CODES.BAD_REQUEST_NO_FILE,
@@ -45,109 +45,109 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
 
 
 
-    
-    try {
-        if (!req.file) {
-            const response: ApiResponse = {
-                code: API_CODES.BAD_REQUEST_NO_FILE,
-                message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? '',
-                data: []
-            };
 
-            return res.status(HTTP_CODES.BAD_REQUEST).json(response);
-        }
+    // try {
+    //     if (!req.file) {
+    //         const response: ApiResponse = {
+    //             code: API_CODES.BAD_REQUEST_NO_FILE,
+    //             message: API_RESPONSES.get(API_CODES.BAD_REQUEST_NO_FILE) ?? '',
+    //             data: []
+    //         };
 
-        const endpoint = `projects/${PROJECT_ID}/locations/${REGION}/endpoints/${ENDPOINT_ID}`;
+    //         return res.status(HTTP_CODES.BAD_REQUEST).json(response);
+    //     }
 
-        const fileBuffer = req.file.buffer;
+    //     const endpoint = `projects/${PROJECT_ID}/locations/${REGION}/endpoints/${ENDPOINT_ID}`;
 
-    // Vertex AI expects instance to be a protobuf `Value` object
-    const instance: protos.google.protobuf.IValue = {
-        structValue: {
-            fields: {
-                content: { stringValue: fileBuffer.toString('base64') }
-            }
-        }
-    };
+    //     const fileBuffer = req.file.buffer;
 
-    const [predictionResponse] = await vertexClient.predict({
-        endpoint,
-        instances: [instance],
-    });
-        
-    const predictions = predictionResponse.predictions;
+    // // Vertex AI expects instance to be a protobuf `Value` object
+    // const instance: protos.google.protobuf.IValue = {
+    //     structValue: {
+    //         fields: {
+    //             content: { stringValue: fileBuffer.toString('base64') }
+    //         }
+    //     }
+    // };
 
-    if (!predictions || predictions.length === 0) {
-        const response: ApiResponse = {
-            code: API_CODES.PREDICTION_NO_DATA,
-            message: API_RESPONSES.get(API_CODES.PREDICTION_NO_DATA) ?? '',
-            data: []
-        };
-        
-        return res.status(HTTP_CODES.BAD_REQUEST).json(response);
-    }
+    // const [predictionResponse] = await vertexClient.predict({
+    //     endpoint,
+    //     instances: [instance],
+    // });
 
-    const possibleLabels: PossibleLabel[] = [];
-    
-    for (const prediction of predictions) {
-        if (prediction.structValue && prediction.structValue.fields) {
-            const fields = prediction.structValue.fields;
-            
-            let displayNames: string[] = [];
-            if (fields.displayNames && fields.displayNames.listValue && fields.displayNames.listValue.values) {
-                displayNames = fields.displayNames.listValue.values
-                    .filter((item: any) => item.stringValue)
-                    .map((item: any) => item.stringValue);
-            }
-            
-            let confidences: number[] = [];
-            if (fields.confidences && fields.confidences.listValue && fields.confidences.listValue.values) {
-                confidences = fields.confidences.listValue.values
-                    .filter((item: any) => item.numberValue !== undefined)
-                    .map((item: any) => item.numberValue);
-            }
-            
-            const minLength = Math.min(displayNames.length, confidences.length);
-            for (let i = 0; i < minLength; i++) {
-                if (displayNames[i] && confidences[i] !== undefined) {
-                    possibleLabels.push({
-                        description: displayNames[i],
-                        score: confidences[i],
-                    });
-                }
-            }
-        } else {
-            console.error('[🔴] Unexpected Vertex response format: ', prediction);
+    // const predictions = predictionResponse.predictions;
 
-            const response: ApiResponse = {
-                code: API_CODES.INTERNAL_SERVER_ERROR,
-                message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
-                data: []
-            };
-            
-            return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
-        }
-    }
+    // if (!predictions || predictions.length === 0) {
+    //     const response: ApiResponse = {
+    //         code: API_CODES.PREDICTION_NO_DATA,
+    //         message: API_RESPONSES.get(API_CODES.PREDICTION_NO_DATA) ?? '',
+    //         data: []
+    //     };
 
-    possibleLabels.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
-    const top3PossibleLabels = possibleLabels.slice(0, 3);
+    //     return res.status(HTTP_CODES.BAD_REQUEST).json(response);
+    // }
 
-    const response: ApiResponse = {
-        code: API_CODES.PREDICTION_SUCCESS,
-        message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
-        data: top3PossibleLabels
-    };
+    // const possibleLabels: PossibleLabel[] = [];
 
-        res.status(HTTP_CODES.OK).json(response);
-    } catch (error) {
-        console.error('[🔴] Unexpected error: ', error);
+    // for (const prediction of predictions) {
+    //     if (prediction.structValue && prediction.structValue.fields) {
+    //         const fields = prediction.structValue.fields;
 
-        const response: ApiResponse = {
-            code: API_CODES.INTERNAL_SERVER_ERROR,
-            message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
-            data: []
-        };
+    //         let displayNames: string[] = [];
+    //         if (fields.displayNames && fields.displayNames.listValue && fields.displayNames.listValue.values) {
+    //             displayNames = fields.displayNames.listValue.values
+    //                 .filter((item: any) => item.stringValue)
+    //                 .map((item: any) => item.stringValue);
+    //         }
 
-        res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
-    }
+    //         let confidences: number[] = [];
+    //         if (fields.confidences && fields.confidences.listValue && fields.confidences.listValue.values) {
+    //             confidences = fields.confidences.listValue.values
+    //                 .filter((item: any) => item.numberValue !== undefined)
+    //                 .map((item: any) => item.numberValue);
+    //         }
+
+    //         const minLength = Math.min(displayNames.length, confidences.length);
+    //         for (let i = 0; i < minLength; i++) {
+    //             if (displayNames[i] && confidences[i] !== undefined) {
+    //                 possibleLabels.push({
+    //                     description: displayNames[i],
+    //                     score: confidences[i],
+    //                 });
+    //             }
+    //         }
+    //     } else {
+    //         console.error('[🔴] Unexpected Vertex response format: ', prediction);
+
+    //         const response: ApiResponse = {
+    //             code: API_CODES.INTERNAL_SERVER_ERROR,
+    //             message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
+    //             data: []
+    //         };
+
+    //         return res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
+    //     }
+    // }
+
+    // possibleLabels.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    // const top3PossibleLabels = possibleLabels.slice(0, 3);
+
+    // const response: ApiResponse = {
+    //     code: API_CODES.PREDICTION_SUCCESS,
+    //     message: API_RESPONSES.get(API_CODES.PREDICTION_SUCCESS) ?? '',
+    //     data: top3PossibleLabels
+    // };
+
+    //     res.status(HTTP_CODES.OK).json(response);
+    // } catch (error) {
+    //     console.error('[🔴] Unexpected error: ', error);
+
+    //     const response: ApiResponse = {
+    //         code: API_CODES.INTERNAL_SERVER_ERROR,
+    //         message: API_RESPONSES.get(API_CODES.INTERNAL_SERVER_ERROR) ?? '',
+    //         data: []
+    //     };
+
+    //     res.status(HTTP_CODES.INTERNAL_SERVER_ERROR).json(response);
+    // }
 }

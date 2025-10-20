@@ -52,7 +52,7 @@ gs://seashell-dataset/scallop/scallop_001.jpg,scallop
 Versions:
 
 ```
-Node: v24.9.0
+Node: 24.9.0
 NPM: 11.6.0
 ```
 
@@ -67,11 +67,18 @@ VERTEX_ENDPOINT_ID=your-endpoint-id
 EOF
 ```
 
-3. Run the project:
+3. Run the server:
 
 ```shell
 npm i
 npm run dev
 ```
 
-The app will start running on http://localhost:9000. (You can change the port number in `index.ts`)
+4. Run the client in another tab:
+
+```shell
+npm i
+npm run dev
+```
+
+The server and client will run on http://localhost:9000 and http://localhost:9001 respetively.
