@@ -4,6 +4,7 @@ import { API_CODES, API_RESPONSES } from '../../shared/constants/api.js';
 import { HTTP_CODES } from '../constants/http.js';
 import { PredictionServiceClient } from '@google-cloud/aiplatform';
 import type { protos } from '@google-cloud/aiplatform';
+import { formatName } from '../utils/format.js';
 
 const PROJECT_ID = process.env.GC_PROJECT_ID;
 const REGION: string = 'us-central1';
@@ -79,7 +80,7 @@ export async function identify(req: Request, res: Response, next: NextFunction) 
             for (let i = 0; i < minLength; i++) {
                 if (displayNames[i] && confidences[i] !== undefined) {
                     possibleLabels.push({
-                        description: displayNames[i],
+                        description: formatName(displayNames[i] ?? ''),
                         score: confidences[i],
                     });
                 }
