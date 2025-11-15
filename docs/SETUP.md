@@ -62,7 +62,7 @@ NPM: 11.6.0
 ```shell
 cat <<EOF > .env
 GOOGLE_APPLICATION_CREDENTIALS=your-creds-file
-GCLOUD_PROJECT_ID=your-project-id
+GC_PROJECT_ID=your-project-id
 VERTEX_ENDPOINT_ID=your-endpoint-id
 EOF
 ```
