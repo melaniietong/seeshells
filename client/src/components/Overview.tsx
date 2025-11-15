@@ -2,6 +2,7 @@ import '../styles/styles.scss'
 import type { ApiResponse } from '../../../shared/types/api';
 import PercentageBar from './PercentageBar';
 import arrowIcon from '../assets/arrow.svg';
+import lowConfidenceImage from '../assets/low-confidence.svg';
 import getWikipediaImageUrl from '../utils/image';
 import { useEffect, useState } from 'react';
 
@@ -11,18 +12,26 @@ interface OverviewProps {
 
 const Overview: React.FC<OverviewProps> = ({ result }) => {
     const [imageUrl, setImageUrl] = useState<string>('');
+    const [isLowConfidence, setIsLowConfidence] = useState<boolean>(false);
+
+    const secondaryResultsDisplay = isLowConfidence ? result.data : result.data.slice(1);
 
     useEffect(() => {
         const fetchImage = async () => {
             const top = result.data[0];
-            if (
+            const hasHighConfidence = Boolean(
+                top &&
                 top.score &&
-                (top.score * 100) > 50 &&
-                top.description &&
-                top.description !== ''
-            ) {
+                (top.score * 100) > 50
+            );
+
+            setIsLowConfidence(!hasHighConfidence);
+
+            if (hasHighConfidence && top.description && top.description !== '') {
                 const url = await getWikipediaImageUrl(top.description);
-                setImageUrl(url ?? '');
+                setImageUrl(url ?? lowConfidenceImage);
+            } else {
+                setImageUrl(lowConfidenceImage);
             }
         };
 
@@ -35,29 +44,34 @@ const Overview: React.FC<OverviewProps> = ({ result }) => {
                 {imageUrl != '' && (
                     <img
                         src={`${imageUrl}`}
-                        className='w-50' />
+                        className={`w-50 ${isLowConfidence ? 'background-light-grey p-32' : ''}`} />
                 )}
                 <div className='w-50 d-flex flex-col gap-42'>
                     <div className='d-flex flex-col gap-12'>
-                        <div className='text-regular m-b-4'>Top prediction</div>
-                        <div className='text-regular-large'>{result.data[0].description}</div>
-                        <a
-                            className='d-flex gap-4'
-                            href={`https://en.wikipedia.org/wiki/${result.data[0].description}`}
-                            target='_blank'>
-                            <img
-                                src={arrowIcon}
-                                alt='Link'
-                                className='w-12px' />
-                            <div className='text-regular-small'>Wikipedia article</div>
-                        </a>
-                        <PercentageBar percentage={Number(result.data[0].score)} />
+                        <div className='text-regular m-b-4'>{isLowConfidence ? 'Unclear prediction' : 'Top prediction'}</div>
+                        <div className='text-regular-large'>{isLowConfidence ? 'Try uploading a clearer image with a contrasting background' : result.data[0].description}</div>
+
+                        {!isLowConfidence && (
+                            <>
+                                <a
+                                    className='d-flex gap-4'
+                                    href={`https://en.wikipedia.org/wiki/${result.data[0].description}`}
+                                    target='_blank'>
+                                    <img
+                                        src={arrowIcon}
+                                        alt='Link'
+                                        className='w-12px' />
+                                    <div className='text-regular-small'>Wikipedia article</div>
+                                </a>
+                                <PercentageBar percentage={Number(result.data[0].score)} />
+                            </>
+                        )}
                     </div>
 
                     <div className='d-flex flex-col gap-12'>
-                        <div className='text-regular m-b-4'>Other predictions</div>
+                        <div className='text-regular m-b-4'>{isLowConfidence ? 'Predictions' : 'Other predictions'}</div>
 
-                        {result.data.slice(1).map((pred, i) => (
+                        {secondaryResultsDisplay.map((pred, i) => (
                             <div
                                 key={i}
                                 className="d-flex flex-col gap-8">
