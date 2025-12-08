@@ -1,6 +1,6 @@
 import type { ApiCode } from '../constants/api.js';
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse {
     code: ApiCode,
     message: string
     data: PossibleLabel[]|[];
