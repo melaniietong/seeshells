@@ -7,8 +7,8 @@ import Overview from './components/Overview.tsx';
 import { ToastContainer, Slide } from 'react-toastify';
 
 const App: React.FC = () => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<ApiResponse | null>(null);
 
   useEffect(() => {
